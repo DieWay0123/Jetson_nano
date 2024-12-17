@@ -75,13 +75,20 @@ for i in range(len(img_number)):
   plt.imshow(img, cmap='gray')
 plt.suptitle("Input handwrite numbers")
 plt.show()
+plt.savefig('output.png')
 
 #預測手寫學號數字
 img_number = np.array(img_number)
 predictions = model.predict(img_number)
 ans = np.argmax(predictions, axis=1)
 
-
+plt.figure(3)
+for i in range(7):
+  plt.subplot(2, 7, i+1)
+  plt.bar(range(10), predictions[i])
+  plt.xticks(range(10))
+  plt.ylim([0, 1])
+plt.savefig('output2.png')
 
 #輸出預測結果
 id = str.join("", map(str,ans))
